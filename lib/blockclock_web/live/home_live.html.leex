@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7c9f7145d8.js" crossorigin="anonymous"></script>
+
+    <!-- Main CSS
+    <link rel="stylesheet" href="main-style.css" />
+    <link rel="shortcut icon" type="image/png" href="<%=Routes.static_path(@socket,"/assets/images/sports-icon/favicon.png")%>"/>
+ -->
+    <title>Boombabet | Sports | Jeux | Jeux d'adresse</title>
+  </head>
+
+  <body>
+
+
+  <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Nav 1*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+  <main>
+  <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Nav 2*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+  <%= live_component BlockclockWeb.Topmenu %>
+  <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Nav 2*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+  </main>
+
+
+
+       <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-* list part*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+                <section id="main-part">
+                  <section class="left-list-menu">
+                    <!-- <div class="Search_SearchIcon ">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input placeholder="Search..." type="text" class="SearchInput "></div>
+
+                        <div class="wn-Product wn-Product_Title-selected ">
+                          <div class="wn-Product_Image wn-Product_Image-sports "></div>
+                          <div class="wn-Product_Title ">Sports</div></div>
+
+                          <div class="wn-Product wn-Product_Title-selected ">
+                          <div class="wn-Product_Image wn-Product_Image-sports "></div>
+                            <div class="wn-Product_Title ">Sports</div></div>-->
+                  <ul  class="left-list-menu-second-list">
+                  <li class="left-list-menu-first-icon">
+                    <a href="#"> Offers</a><i class="fa-solid fa-sack-dollar"></i></li>
+
+                  <h1>  FREQUENTLY VISITED</h1>
+
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/horizontal-list/colors/soccer-color.png")%>"><a href="<%= Routes.pregame_path(@socket, :index, "soccer")%>"> Soccer </a></div><button id="btn" class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ball.png")%>" alt="Italian Trulli" ><a href="#"> Baseball </a></div><button id="btn" class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/basketball.png")%>" alt="Italian Trulli" ><a href="#"> Basketball</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/boxing-gloves.png")%>" alt="Italian Trulli" ><a href="#"> Boxing/MMA</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <h1> FULL LIST</h1>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/horizontal-list/colors/soccer-color.png")%>"><a href="<%= Routes.pregame_path(@socket, :index, "soccer")%>"> Soccer </a></div><button id="btn" class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/rugby-ball.png")%>" alt="Italian Trulli" ><a href="#"> American Football</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/Australian.png")%>" alt="Italian Trulli" ><a href="#"> Australian Rules</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ball.png")%>" alt="Italian Trulli" ><a href="#"> Baseball</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/basketball.png")%>" alt="Italian Trulli" ><a href="#"> Basketball</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/boxing-gloves.png")%>" alt="Italian Trulli" ><a href="#">Boxing/MMA</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/chip.png")%>" alt="Italian Trulli" ><a href="#">Casino</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/cricket.png")%>" alt="Italian Trulli" ><a href="#">Cricket</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/cycling.png")%>" alt="Italian Trulli" ><a href="#"> Cycling</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/target.png")%>" alt="Italian Trulli" ><a href="#">Darts</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/gamepad.png")%>" alt="Italian Trulli" ><a href="#">Esports</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/sports.png")%>" alt="Italian Trulli" ><a href="#">Fantasy Sports</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/racing.png")%>" alt="Italian Trulli" ><a href="#">Formula 1</a> </div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/Futsal.png")%>" alt="Italian Trulli" ><a href="#"> Futsal</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/Gaelic-football.png")%>" alt="Italian Trulli" ><a href="#"> Gaelic Sports</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/golf.png")%>" alt="Italian Trulli" ><a href="#">  Golf </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                <li class="a"> <div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/greyhound.png")%>" alt="Italian Trulli" ><a href="#"> Greyhounds </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/hockey.png")%>" alt="Italian Trulli" ><a href="#">  Hockey</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/horse.png")%>" alt="Italian Trulli" ><a href="#">  Horse Racing</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div> <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/player.png")%>" alt="Italian Trulli" ><a href="#"> Ice Hockey</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"> <div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/gambling.png")%>" alt="Italian Trulli" ><a href="#">  Lotto</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="left-list-menu-list-1">
+                     <label for="bttn"  class="b-1"> Motor Sports
+                     <span class="fas fa-caret-down"></span></label>
+                     <input type="checkbox" id="bttn">
+                  <ul class="left-list-menu-list-1-2">
+                    <li class="b-2"> <div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/helmet.png")%>" alt="Italian Trulli" ><a href="#">  Motorbikes</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button> </li>
+                    <li class="b-2"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/racing.png")%>" alt="Italian Trulli" ><a href="#"> NASCAR </a></div> <button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                    </ul>
+                  </li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/vote.png")%>" alt="Italian Trulli" ><a href="#"> Politics</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/professional.png")%>" alt="Italian Trulli" ><a href="#"> Rugby League</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/rugby.png")%>" alt="Italian Trulli" ><a href="#"> Rugby Union</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/Snooker.png")%>" alt="Italian Trulli" ><a href="#"> Snookeer</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football.png")%>" alt="Italian Trulli" ><a href="#"> Soccer</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+
+                  <li class="left-list-menu-list-2">
+                    <label for="btnn"  class="b-2"> Specials
+                    <span class="fas fa-caret-down"></span></label>
+                    <input type="checkbox" id="btnn">
+                  <ul class="left-list-menu-list-2-3">
+                    <li class="b-3"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/computer.png")%>" alt="Italian Trulli" ><a href="#">World </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                   <li class="b-3"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/computer.png")%>" alt="Italian Trulli" ><a href="#">Denmark</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                   <li class="b-3"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/computer.png")%>" alt="Italian Trulli" ><a href="#">Italy </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                   <li class="b-3"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/computer.png")%>" alt="Italian Trulli" ><a href="#">United Kingdom </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li></ul>
+                  </li>
+
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/helmet.png")%>" alt="Italian Trulli" ><a href="#">Speedway</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/table-tennis.png")%>" alt="Italian Trulli" ><a href="#"> Table Tennis</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/tennis.png")%>" alt="Italian Trulli" ><a href="#"> Tennis</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/horseback.png")%>" alt="Italian Trulli" ><a href="#"> Trotting</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/sport.png")%>" alt="Italian Trulli" ><a href="#"> Virtual Sports </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  <li class="a"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/Volleyball.png")%>" alt="Italian Trulli" ><a href="#"> Volleyball</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+
+
+                  <li class="left-list-menu-list-3">
+                    <label for="btnnn"  class="b-3"> Winter Sports
+                    <span class="fas fa-caret-down"></span></label>
+                    <input type="checkbox" id="btnnn">
+                  <ul class="left-list-menu-list-3-4">
+                   <li class="b-4"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ski.png")%>" alt="Italian Trulli" ><a href="#"> Alpine Skiing</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                   <li class="b-4"><div>
+                    <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ski.png")%>" alt="Italian Trulli" >
+                    <a href="#"> Bithlon </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                   <li class="b-4"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/alpine.png")%>" alt="Italian Trulli" ><a href="#"> Ski Jumping</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li></ul>
+                  </li>
+                  <li class="left-list-menu-list-4">
+                    <label for="btnnnn"  class="b-4"> More Sports
+                    <span class="fas fa-caret-down"></span></label>
+                    <input type="checkbox" id="btnnnn">
+                  <ul class="left-list-menu-list-4-5">
+                   <li class="b-5"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/shuttlecock.png")%>" alt="Italian Trulli" ><a href="#">Badminton</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                   <li class="b-5"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/voleyball.png")%>" alt="Italian Trulli" ><a href="#"> Beach Voleyball </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                   <li class="b-5"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/handball.png")%>" alt="Italian Trulli" ><a href="#"> Handball</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                    <li class="b-5"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/lacrosse.png")%>" alt="Italian Trulli" ><a href="#"> Floorball</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+
+                    <li class="b-5"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/surfing.png")%>" alt="Italian Trulli" ><a href="#"> Surfing</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                    <li class="b-5"><div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/water-polo.png")%>" alt="Italian Trulli" ><a href="#">Water Polo </a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+                  </ul>
+                  </li>
+                  <li  class="a"><a class="v"  href="#">Odds On Coupon</a></li>
+                  <li  class="a"><a class="v" href="#"> Top Events</a></li>
+
+                  </ul>
+                  </section>
+
+                   <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-* middle part*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+
+                  <section class="middle-part">
+
+                  <section class="middle-part-part-1">
+                  <div class="middle-part-part-1-right-part">
+                  <div class="middle-part-part-1-lign-1">
+                  <a href="#" class="middle-part-part-1-big-link">
+                  <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/affiche.jpg")%>" alt="Italian Trulli" >
+
+                </a>
+          <div class="middle-part-part-1-absolute" >
+            <a href="#"> New Customer Offer</a>
+
+        <a href="#"> Get Up To 30$ in Bet Credits </a>
+        <button class="btn-join"> Join Now </button>
+        <a href="#"> Returns Exclue Bet Credits Stake T&CS, Time Limits And Exclusions Apply</a>
+          </div>
+                </div>
+
+             <div class="middle-part-lign-2">
+             <div class="middle-part-lign-2-tt">
+               <a class="off">Featured</a>
+               <a class="on">Top Events</a>
+            </div>
+             <div class="middle-part-lign-2-title">
+              <h3> Bet </h3>
+              <h3>  Boost </h3>
+              <i class="fa-solid fa-angles-right"></i>
+            </div>
+
+              <!-- carousel part -->
+                 <section class="middle-part-lign-2-carousel">
+
+
+
+                    <!--  prev button -->
+                    <div class="middle-part-lign-2-carousel-boutton-prev">
+                      <i class="fa-solid fa-angle-left"></i>
+                      </div>
+
+
+           <!-- first affiche -->
+
+           <div>
+           <div class="imgcarousel">  <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ball.png")%>" alt="Italian Trulli" >
+
+                  <h1>Goerge Russel - Yes</h1> </div>
+                  <p>Poduim Finish</p>
+                  <p>Poduim Finish Poduim Finish Poduim Finish</p>
+                  <a href="#">
+                    <strike><h3> 11.00 </h3> </strike>
+                    <i class="fa-solid fa-angles-right"></i>
+                    <h3>  13.00 </h3></a>
+                     </div>
+                <!-- second affiche -->
+
+           <div>
+            <div class="imgcarousel">  <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ball.png")%>" alt="Italian Trulli" >
+
+              <h1>Goerge Russel - Yes</h1> </div>
+            <p>Poduim Finish</p>
+            <p>Poduim Finish Poduim Finish Poduim Finish</p>
+            <a href="#">
+                    <strike><h3> 11.00 </h3> </strike>
+                    <i class="fa-solid fa-angles-right"></i>
+                    <h3>  13.00 </h3></a>
+                     </div>
+                <!-- third affiche -->
+
+           <div>
+            <div class="imgcarousel">  <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ball.png")%>" alt="Italian Trulli" >
+
+              <h1>Goerge Russel - Yes</h1> </div>
+            <p>Poduim Finish</p>
+            <p>Poduim Finish Poduim Finish Poduim Finish</p>
+            <a href="#">
+                    <strike><h3> 11.00 </h3> </strike>
+                    <i class="fa-solid fa-angles-right"></i>
+                    <h3>  13.00 </h3></a>
+                     </div>
+                <!-- fourth affiche -->
+
+           <div>
+            <div class="imgcarousel">  <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ball.png")%>" alt="Italian Trulli" >
+
+              <h1>Goerge Russel - Yes</h1> </div>
+            <p>Poduim Finish</p>
+            <p>Poduim Finish Poduim Finish Poduim Finish</p>
+            <a href="#">
+                    <strike><h3> 11.00 </h3> </strike>
+                    <i class="fa-solid fa-angles-right"></i>
+                    <h3>  13.00 </h3></a>
+                     </div>
+                <!-- fifth affiche -->
+
+           <div>
+            <div class="imgcarousel">  <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/ball.png")%>" alt="Italian Trulli" >
+
+              <h1>Goerge Russel - Yes</h1> </div>
+            <p>Poduim Finish</p>
+            <p>Poduim Finish Poduim Finish Poduim Finish</p>
+            <a href="#">
+                    <strike><h3> 11.00 </h3> </strike>
+                    <i class="fa-solid fa-angles-right"></i>
+                    <h3>  13.00 </h3></a>
+                     </div>
+
+                         <!-- next prev button -->
+
+                    <div class="middle-part-lign-2-carousel-boutton-next">
+                      <i class="fa-solid fa-angle-right"></i>
+                                   </div>
+              </section>
+
+                  </div>
+
+                  <div class="lign-3">
+
+                 <!-- lign 1 -->
+
+                    <div class="lign-3-first">
+                      <h2> In-Play</h2>
+                      <div class="second"> <p>63 Events</p>
+                       <i class="fa-solid fa-angle-right"></i></div>
+                     </div>
+
+                    <!-- lign 2 -->
+
+                   <div class="lign-3-second">
+
+                <h2> Soccer</h2>
+
+                 <div class="numbers">
+                  <p>1</p>
+                  <p>X</p>
+                  <p>2</p>
+                  </div>
+
+                  </div>
+
+                    <!-- lign 3 -->
+                    <div class="lign-3-third">
+                      <div class="lign-3-third-left">
+                      <div>
+                       <p> Tigres UANL </p>
+                      </div>
+
+                      <div>
+                         <p> Brighton </p>
+                        </div>
+
+                      <div >
+                     <p> Today 9:30</p>
+                     <i class="fa-brands fa-youtube"></i>
+                     <a> 6 <i class="fa-solid fa-angle-right"></i>
+                     </a>
+                  </div>
+                </div>
+
+                  <div class="zeros"> <p>0</p><p>0</p></div>
+
+                  <div class="cotes">
+
+                    <div>1.57</div>
+                    <div>3.60</div>
+                    <div> 6.50</div>
+
+                   </div>
+
+                    </div>
+
+                    <div class="lign-3-third">
+                      <div class="lign-3-third-left">
+                      <div>
+                       <p> Tigres UANL </p>
+                      </div>
+
+                      <div>
+                         <p> Brighton </p>
+                        </div>
+
+                      <div >
+                     <p> Today 9:30</p>
+                     <i class="fa-brands fa-youtube"></i>
+                     <a> 6 <i class="fa-solid fa-angle-right"></i>
+                     </a>
+                  </div>
+                </div>
+
+                  <div class="zeros"> <p>0</p><p>0</p></div>
+
+                  <div class="cotes">
+
+                    <div>1.57</div>
+                    <div>3.60</div>
+                    <div> 6.50</div>
+
+                   </div>
+
+                    </div>
+
+                    <div class="lign-3-third">
+                      <div class="lign-3-third-left">
+                      <div>
+                       <p> Tigres UANL </p>
+                      </div>
+
+                      <div>
+                         <p> Brighton </p>
+                        </div>
+
+                      <div >
+                     <p> Today 9:30</p>
+                     <i class="fa-brands fa-youtube"></i>
+                     <a> 6 <i class="fa-solid fa-angle-right"></i>
+                     </a>
+                  </div>
+                </div>
+
+                  <div class="zeros"> <p>0</p><p>0</p></div>
+
+                  <div class="cotes">
+
+                    <div>1.57</div>
+                    <div>3.60</div>
+                    <div> 6.50</div>
+
+                   </div>
+
+                    </div>
+                    <div class="lign-3-third">
+                      <div class="lign-3-third-left">
+                      <div>
+                       <p> Tigres UANL </p>
+                      </div>
+
+                      <div>
+                         <p> Brighton </p>
+                        </div>
+
+                      <div >
+                     <p> Today 9:30</p>
+                     <i class="fa-brands fa-youtube"></i>
+                     <a> 6 <i class="fa-solid fa-angle-right"></i>
+                     </a>
+                  </div>
+                </div>
+
+                  <div class="zeros"> <p>0</p><p>0</p></div>
+
+                  <div class="cotes">
+
+                    <div>1.57</div>
+                    <div>3.60</div>
+                    <div> 6.50</div>
+
+                   </div>
+
+                    </div>
+                    <div class="lign-3-third">
+                      <div class="lign-3-third-left">
+                      <div>
+                       <p> Tigres UANL </p>
+                      </div>
+
+                      <div>
+                         <p> Brighton </p>
+                        </div>
+
+                      <div >
+                     <p> Today 9:30</p>
+                     <i class="fa-brands fa-youtube"></i>
+                     <a> 6 <i class="fa-solid fa-angle-right"></i>
+                     </a>
+                  </div>
+                </div>
+
+                  <div class="zeros"> <p>0</p><p>0</p></div>
+
+                  <div class="cotes">
+
+                    <div>1.57</div>
+                    <div>3.60</div>
+                    <div> 6.50</div>
+
+                   </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="lign-4">
+                  <div class="lign-4-h2">
+                   <h2> Tennis </h2>
+
+             <div class="lign-4-cotes">
+              <div>1</div> <div>2</div> </div>
+
+                  </div>
+              <div class="lign-4-third">
+                 <div class="lign-4-third-left">
+                    <div>
+                  <div></div> <p> Kristina </p>
+                    </div>
+
+                    <div>
+                  <div></div>  <p> Leolia </p>
+                      </div>
+
+                    <div >
+                   <p> Today 9:30</p>
+                   <i class="fa-brands fa-youtube"></i>
+                   <a> 6 <i class="fa-solid fa-angle-right"></i>
+                   </a>
+                </div>
+              </div>
+
+                <div class="lign-4-zeros">
+                <div> <p>1</p><p>4</p><p>0</p> </div>
+                <div> <p>1</p><p>4</p><p>15</p> </div>
+              <div> <p>1</p><p>2</p><p>30</p> </div>
+                  </div>
+
+                <div class="lign-4-second-cotes">
+
+                  <div>2.37</div>
+                  <div>1.57</div>
+
+                 </div>
+                  </div>
+                  <div class="lign-4-third">
+                    <div class="lign-4-third-left">
+                       <div>
+                     <div></div> <p> Kristina </p>
+                       </div>
+
+                       <div>
+                     <div></div>  <p> Leolia </p>
+                         </div>
+
+                       <div >
+                      <p> Today 9:30</p>
+                      <i class="fa-brands fa-youtube"></i>
+                      <a> 6 <i class="fa-solid fa-angle-right"></i>
+                      </a>
+                   </div>
+                 </div>
+
+                   <div class="lign-4-zeros">
+                   <div> <p>1</p><p>4</p><p>0</p> </div>
+                   <div> <p>1</p><p>4</p><p>15</p> </div>
+                 <div> <p>1</p><p>2</p><p>30</p> </div>
+                     </div>
+
+                   <div class="lign-4-second-cotes">
+
+                     <div>2.37</div>
+                     <div>1.57</div>
+
+                    </div>
+                     </div>
+                  </div>
+                </div>
+
+        <div class="middle-part-part-1-left-part">
+       <h2> Featured Matches</h2>
+
+       <section class="middle-part-part-1-left-part-first">
+
+             <!-- lign 1 -->
+
+       <div class="middle-part-part-1-left-part-top-lign1">
+
+       <div class="left">
+      <div>
+      <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/t-shirt.png")%>" alt="Italian Trulli" >
+       <p> Tigres UANL </p>
+      </div>
+
+      <div>
+        <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football-shirt.png")%>" alt="Italian Trulli" >
+         <p> Brighton </p>
+        </div>
+
+      <div >
+     <p> Today 9:30</p>
+     <i class="fa-brands fa-youtube"></i>
+     <a> 6 <i class="fa-solid fa-angles-right"></i> </a>
+  </div>
+
+   </div>
+       <div class="right">
+
+        <div> <a>1</a><a>3.60</a></div>
+        <div><a>X</a><a>3.80</a></div>
+        <div><a>2</a><a>1.95</a> </div>
+
+       </div>
+
+       </div>
+
+       <div class="middle-part-part-1-left-part-top-lign1">
+
+        <div class="left">
+       <div>
+       <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/t-shirt.png")%>" alt="Italian Trulli" >
+        <p> Tigres UANL </p>
+       </div>
+
+       <div>
+         <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football-shirt.png")%>" alt="Italian Trulli" >
+          <p> Brighton </p>
+         </div>
+
+       <div >
+      <p> Today 9:30</p>
+      <i class="fa-brands fa-youtube"></i>
+      <a> 6 <i class="fa-solid fa-angles-right"></i> </a>
+   </div>
+
+    </div>
+        <div class="right">
+
+         <div> <a>1</a><a>3.60</a></div>
+         <div><a>X</a><a>3.80</a></div>
+         <div><a>2</a><a>1.95</a> </div>
+
+        </div>
+
+        </div>
+        <div class="middle-part-part-1-left-part-top-lign1">
+
+          <div class="left">
+         <div>
+         <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/t-shirt.png")%>" alt="Italian Trulli" >
+          <p> Tigres UANL </p>
+         </div>
+
+         <div>
+           <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football-shirt.png")%>" alt="Italian Trulli" >
+            <p> Brighton </p>
+           </div>
+
+         <div >
+        <p> Today 9:30</p>
+        <i class="fa-brands fa-youtube"></i>
+        <a> 6 <i class="fa-solid fa-angles-right"></i> </a>
+     </div>
+
+      </div>
+          <div class="right">
+
+           <div> <a>1</a><a>3.60</a></div>
+           <div><a>X</a><a>3.80</a></div>
+           <div><a>2</a><a>1.95</a> </div>
+
+          </div>
+
+          </div>
+          <div class="middle-part-part-1-left-part-top-lign1">
+
+            <div class="left">
+           <div>
+           <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/t-shirt.png")%>" alt="Italian Trulli" >
+            <p> Tigres UANL </p>
+           </div>
+
+           <div>
+             <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football-shirt.png")%>" alt="Italian Trulli" >
+              <p> Brighton </p>
+             </div>
+
+           <div >
+          <p> Today 9:30</p>
+          <i class="fa-brands fa-youtube"></i>
+          <a> 6 <i class="fa-solid fa-angles-right"></i> </a>
+       </div>
+
+        </div>
+            <div class="right">
+
+             <div> <a>1</a><a>3.60</a></div>
+             <div><a>X</a><a>3.80</a></div>
+             <div><a>2</a><a>1.95</a> </div>
+
+            </div>
+
+            </div>
+            <div class="middle-part-part-1-left-part-top-lign1">
+
+              <div class="left">
+             <div>
+             <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/t-shirt.png")%>" alt="Italian Trulli" >
+              <p> Tigres UANL </p>
+             </div>
+
+             <div>
+               <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football-shirt.png")%>" alt="Italian Trulli" >
+                <p> Brighton </p>
+               </div>
+
+             <div >
+            <p> Today 9:30</p>
+            <i class="fa-brands fa-youtube"></i>
+            <a> 6 <i class="fa-solid fa-angles-right"></i> </a>
+         </div>
+
+          </div>
+              <div class="right">
+
+               <div> <a>1</a><a>3.60</a></div>
+               <div><a>X</a><a>3.80</a></div>
+               <div><a>2</a><a>1.95</a> </div>
+
+              </div>
+
+              </div>
+              <div class="middle-part-part-1-left-part-top-lign1">
+
+                <div class="left">
+               <div>
+               <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/t-shirt.png")%>" alt="Italian Trulli" >
+                <p> Tigres UANL </p>
+               </div>
+
+               <div>
+                 <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football-shirt.png")%>" alt="Italian Trulli" >
+                  <p> Brighton </p>
+                 </div>
+
+               <div >
+              <p> Today 9:30</p>
+              <i class="fa-brands fa-youtube"></i>
+              <a> 6 <i class="fa-solid fa-angles-right"></i> </a>
+           </div>
+
+            </div>
+                <div class="right">
+
+                 <div> <a>1</a><a>3.60</a></div>
+                 <div><a>X</a><a>3.80</a></div>
+                 <div><a>2</a><a>1.95</a> </div>
+
+                </div>
+
+                </div>
+                <div class="middle-part-part-1-left-part-top-lign1">
+
+                  <div class="left">
+                 <div>
+                 <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/t-shirt.png")%>" alt="Italian Trulli" >
+                  <p> Tigres UANL </p>
+                 </div>
+
+                 <div>
+                   <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football-shirt.png")%>" alt="Italian Trulli" >
+                    <p> Brighton </p>
+                   </div>
+
+                 <div >
+                <p> Today 9:30</p>
+                <i class="fa-brands fa-youtube"></i>
+                <a> 6 <i class="fa-solid fa-angles-right"></i> </a>
+             </div>
+
+              </div>
+                  <div class="right">
+
+                   <div> <a>1</a><a>3.60</a></div>
+                   <div><a>X</a><a>3.80</a></div>
+                   <div><a>2</a><a>1.95</a> </div>
+
+                  </div>
+
+                  </div>
+       </section>
+
+
+
+       <section class="middle-part-part-1-left-part-second">
+     <ul>
+     <li> <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/football.png")%>" alt="Italian Trulli" >
+     <h2> Top Leagues</h2></li>
+     <li> Full Time Result  <i class="fa-solid fa-angle-right"></i></li>
+     <li>  Both Teams To Score  <i class="fa-solid fa-angle-right"></i></li>
+     <li> <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/cricket.png")%>" alt="Italian Trulli" >
+          <h2> T20 World Cup</h2>
+     </li>
+
+     <li> To win Out Right <i class="fa-solid fa-angle-right"></i></li>
+     <li> Match Coupon <i class="fa-solid fa-angle-right"></i></li>
+     <li> Top Batter <i class="fa-solid fa-angle-right"></i></li>
+     <li> Top Bowler <i class="fa-solid fa-angle-right"></i></li>
+     <li> <div><img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/tennis.png")%>" alt="Italian Trulli" >
+      <h2>Full List </h2></div>
+        <i class="fa-solid fa-angle-right"></i>      </li>
+
+      </ul>
+       </section>
+
+
+
+        </div>
+                  </section>
+
+                  <section class="part-2" >
+
+
+                    <h2><i class="fa-solid fa-asterisk"></i>Offers</h2>
+                    <div class="part-2-parag">
+                    <div>
+                      <p> 2 Goals Ahead Early Payout</p>
+                      <p>get bets paid out early , new and eligible customers only </p>
+                      <p> more details</p>
+                    </div>
+                    <div>
+                      <p> 2 Goals Ahead Early Payout</p>
+                      <p>get bets paid out early , new and eligible customers only </p>
+                      <p> more details</p>
+                    </div>
+                    <div>
+                      <p> 2 Goals Ahead Early Payout</p>
+                      <p>get bets paid out early , new and eligible customers only </p>
+                      <p> more details</p>
+                    </div>
+                  </div>
+                  </section>
+
+
+                  <section class="part-3">
+                    <h2><i class="fa fa-bolt fa-fw fa-2x"></i> Features</h2>
+                    <div class="part-2-parag">
+                    <div class="part-2-parag-1">
+
+                    <div> <p> Soccer bet builder</p>
+                      <p>get bets paid out early , new and eligible customers only </p>
+                      <p> more details</p></div>
+                      <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/icon1.png")%>" alt="Italian Trulli" >
+
+                    </div>
+                    <div class="part-2-parag-1">
+                      <div> <p> live streaming highlights</p>
+                      <p>get bets paid out early , new and eligible customers only </p>
+                      <p> more details</p></div>
+                      <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/icon2.png")%>" alt="Italian Trulli" >
+
+                    </div>
+                    <div class="part-2-parag-1">
+                      <div> <p> cash out </p>
+                      <p>get bets paid out early , new and eligible customers only </p>
+                      <p> more details</p></div>
+                      <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/icon3.png")%>" alt="Italian Trulli" >
+
+                    </div>
+                  </div>
+                  </section>
+                  <section class="part-4"></section>
+                  <section class="part-5"></section>
+                  <section class="part-6"></section>
+                  <section class="part-7"></section>
+                  <section class="part-8"></section>
+
+                  </section>
+                </section>
+
+    <script src="../javascript/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+
+        <!-- Slick Carousel -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+   <! ---- <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css
+    "/>
+  -->
+
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7c9f7145d8.js" crossorigin="anonymous"></script>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="main-style.css" />
+    <link rel="shortcut icon" type="image/png" href="C:\Users\hp\Desktop\boomba.bet\up\images\favicon.png"/>
+
+    <title>Boombabet | Sports | Jeux | Jeux d'adresse</title>
+  </head>
+
+  <body>
+ <!-------------------------------------------- navbar --------------------------------------------------->
+    <main>
+
+     <%= live_component BlockclockWeb.Topmenu %>
+
+    </main>
+    <!-------------------------------------------- navbar --------------------------------------------------->
+     <!-------------------------------------------- main part --------------------------------------------------->
+     <div class="main-3-columns">
+
+        <!-------------------------------------------- left list menu + filter  --------------------------------------------------->
+
+        <section class="left-list-menu-filter">
+
+          <%= live_component BlockclockWeb.LeftMenuLive , id: "sportclick", data: @data, league: @league, sport_menu: @sport_menu, sport: @sport  %>
+
+        </section>
+     <!-------------------------------------------- left list menu + filter  --------------------------------------------------->
+          <!-------------------------------------------- middle part   --------------------------------------------------->
+        <section class="middle">
+      <!-------------------------------------------- header  --------------------------------------------------->
+
+        <%= live_component BlockclockWeb.Soccer.InplayShowMatchLive, data: @data, sport: @sport, match_id: @match_id %>
+
+
+
+        <footer>
+             hello world
+        </footer>
+     </section>
+        <!-------------------------------------------- middle part   --------------------------------------------------->
+     <!-------------------------------------------- offers + features menu   --------------------------------------------------->
+
+        <div class="right-part-2">
+        <!----------------------integration------------------------------->
+        <%= if @data do %>
+    <% fdata = case @sport do
+       nil ->
+        @data.latest_block
+      "default" ->
+        %{}
+      "basket" ->
+        @data.basket_data
+      "soccer" ->
+        @data.latest_block
+      "close" ->
+        @data.latest_block
+      [] ->
+       @data.latest_block
+    end %>
+
+
+
+       <section class="in-play-live-tracker">
+       <div class="soccer-tracker">
+        <div class="header">
+        <a href=""> <i class="fa-solid fa-chevron-left"></i></a>
+          <h2 class="first"><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "name"])), " vs "),0)%></h2>
+          <div><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "score"])), ":"),0)%></div>
+          <div><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "score"])), ":"),1)%></div>
+          <h2 class="second"><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "name"])), " vs "),1)%></h2>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+
+
+
+        <div class="tracker-part active">
+        <!--   <svg class="tracker"></svg> -->
+          <img src="<%=Routes.static_path(@socket,"/assets/images/screenshots/sc1.png")%>">
+          <a href="#"> Show match info</a>
+        </div>
+
+
+        <div class="st-T-line">
+         <div class="stats-timeline">
+           <div class="active hidden">Live</div>
+            <div class="active default">Stats</div>
+            <div>Timeline</div>
+            <i class="fa-solid fa-chart-simple"></i>
+
+           </div>
+
+        <div class="stats">
+          <img src="<%=Routes.static_path(@socket,"/assets/images/screenshots/sc2.png")%>">
+        </div>
+        <div class="timeline">
+        </div>
+      </div>
+      </div>
+      <div class="my-bets">
+
+        <div class="first-lign">
+          <h2>MY BETS</h2>
+            <div>
+              <div>cashout</div>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div>bets that can be fully or partially cashed out appear here </div>
+
+
+        <%= if @shopping_cart do %>
+          <%= for value <- @shopping_cart do%>
+            <%= if value["sport_id"] == "soccer" do %>
+
+
+              <div class="cards">
+                <i class="fa-solid fa-xmark" phx-click="remove_odd_betslip"
+                                             phx-value-market_id=<%= value["market_id"] %>
+                                             phx-value-handicap=<%= value["odd_name"] %>
+                                             style="FLOAT: RIGHT;">
+                </i>
+                <%= if get_in( @data.latest_block, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+                  <%= for {key1, value1} <- get_in( @data.latest_block, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+                    <%#= String.replace(value1["name"] , " ", "-") %><%#= String.replace(value["odd_name"] , " ", "-") %>
+                    <%= if  String.replace(value1["name"] , " ", "-") == String.replace(String.replace(value["odd_name"] , " ", "-"),":","")
+                        && value1["handicap"] == value["odd_name2"] do %>
+                      <div class="cotes">
+                        <div><%= value1["name"] %>
+                                    <%= if value1["name"] do %>
+                                    <%= value1["handicap"] %>
+                                    <% end %>
+                                    <%= value1["value_eu"] %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %> <!-----for {key1, value1}------->
+                <% else %>
+                  <div style="color:red;"> Cette cote n'est plus disponible !</div>
+                <% end %>
+
+                <div><%= get_in( @data.latest_block, [value["match_id"], "odds", value["market_id"], "name"]) %></div>
+                <div><%= get_in( @data.latest_block, [value["match_id"], "info", "name"]) %></div>
+              </div>
+            <% end %> <!-----if soccer------->
+
+            <%= if value["sport_id"] == "Basketball" do %>
+              <div class="cards">
+                <i class="fa-solid fa-xmark" phx-click="remove_odd_betslip"
+                                         phx-value-market_id=<%= value["market_id"] %>
+                                         phx-value-handicap=<%= value["odd_name"] %>
+                                         >
+                  </i>
+                <%= if get_in( @data.basket_data, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+                  <%= for {key1, value1} <- get_in( @data.basket_data, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+
+                    <%#= String.replace(value1["name"] , " ", "-") %><%#= String.replace(value["odd_name"] , " ", "-") %>
+                    <%=if  String.replace(value1["name"] , " ", "-") == String.replace(value["odd_name"] , " ", "-")
+                      && value["odd_name2"] == value1["handicap"]do %>
+                      <div class="cotes"><div><%= value1["name"] %>
+                                            <%= if value1["handicap"] do %>
+                                            <%= value1["handicap"] %>
+                                            <%= end %>
+                                            <%= value1["value_eu"] %>
+                                            </div>
+                                            </div>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div style="color:red;"> Cette cote n'est plus disponible !</div>
+                <% end %>
+                <div><%=get_in( @data.basket_data, [value["match_id"], "odds", value["market_id"], "name"]) %></div>
+                <div><%=get_in( @data.basket_data, [value["match_id"], "info", "name"]) %></div>
+              </div>
+            <% end %>
+
+              <% end %><!-----if Basketball------->
+
+
+           <% end %><!-----for shopping_cart------->
+           <div class="inputs">
+                  <div>
+                    bet <input type="text">
+                  </div>
+                  <div>
+                    <input type="text"> revenues possible
+                  </div>
+                </div>
+                <button type="button">place bet</button>
+        </div>
+        <% end %><!-----if shopping_cart------->
+
+      <!-------------------------------------end integration--------------------------------->
+         <section class="part-4">
+
+
+             <h2><i class="fa-solid fa-asterisk"></i>Offers</h2>
+             <div class="part-2-parag">
+             <div>
+               <p> 2 Goals Ahead Early Payout</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p>
+             </div>
+             <div>
+               <p> 2 Goals Ahead Early Payout</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p>
+             </div>
+             <div>
+               <p> 2 Goals Ahead Early Payout</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p>
+             </div>
+           </div>
+           </section>
+           <section class="part-5">
+             <h2><i class="fa fa-bolt fa-fw fa-2x"></i> Features</h2>
+             <div class="part-2-parag">
+             <div class="part-2-parag-1">
+
+             <div> <p> Soccer bet builder</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p></div>
+               <img src="C:\Users\hp\Desktop\boomba.bet\up\images/sports-icon/icon1.png" alt="Italian Trulli" >
+
+             </div>
+             <div class="part-2-parag-1">
+               <div> <p> live streaming highlights</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p></div>
+               <img src="C:\Users\hp\Desktop\boomba.bet\up\images/sports-icon/icon2.png" alt="Italian Trulli" >
+
+             </div>
+             <div class="part-2-parag-1">
+               <div> <p> cash out </p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p></div>
+               <img src="C:\Users\hp\Desktop\boomba.bet\up\images/sports-icon/icon3.png" alt="Italian Trulli" >
+
+             </div>
+           </div>
+           </section>
+       </div>
+     <!-------------------------------------------- offers + features menu   --------------------------------------------------->
+     </div>
+      <!-------------------------------------------- main part --------------------------------------------------->
+
+
+     </body>
+
+     </html>

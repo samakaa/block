@@ -1,0 +1,763 @@
+
+<!--<script src="<%= Routes.static_path(@socket,"/assets/javascript/app-live.js") %>"></script>
+<script src="<%= Routes.static_path(@socket,"/assets/javascript/live.js") %>"></script> -->
+
+
+
+
+<main>
+  <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Nav 2*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+  <%= live_component @socket, BlockclockWeb.Topmenu %>
+  <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Nav 2*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+</main>
+<section class="in-play-live">
+
+    <%= live_component @socket, BlockclockWeb.SportsRightMenu, id: "sportclick", data: @data, league: @league, sport_menu: @sport_menu, sport: @sport %>
+
+
+<!------------------------------------------>
+      <section class="in-play-live-matches" >
+
+        <div class="in-play-live-matches-header">
+
+
+
+
+ <%= if @data do %>
+    <% fdata = case @sport do
+
+      nil ->
+        @data.latest_block
+      "default" ->
+        %{}
+      "basket" ->
+        @data.basket_data
+      "soccer" ->
+        @data.latest_block
+      "close" ->
+         @data.latest_block
+      [] ->
+       @data.latest_block
+    end %>
+
+
+
+
+       <a href="in-play.html"><i class="fa-solid fa-chevron-left"></i>
+       In-Play Soccer-Bosnia & herzegovina Premier Liga
+       </a>
+
+       <div class="title">
+        <h2><%=get_in(fdata, [@match_id, "info", "name"]) %></h2>
+        <div><%=get_in(fdata, [@match_id, "info", "seconds"]) %></div>
+      </div>
+
+     <div class="menu">
+      <p class="currently active">All</p>
+      <p class="currently">Bet Builder</p>
+      <p class="currently">Asian Lines</p>
+       <p class="currently">Goals</p>
+        <p class="currently">Half</p>
+        <p class="currently">Minutes</p>
+        <i class="fa-regular fa-bell"></i>
+      </div>
+
+        </div>
+        <div class="in-play-live-matches-body">
+         <div class="in-play-live-matches-body-all active">
+
+       <!---------------- all -------------->
+
+
+
+
+
+
+
+      <%= for {key, value}<- fdata do %>
+        <%=if key ==  @match_id && value["odds"] do %>
+          <%= for {key1, value1} <- value["odds"] do %>
+            <%=if value1["participants"] do %>
+               <% aa= Map.values(value1["participants"])  %>
+             <!----------------Match Goals -------------->
+              <% odds = Enum.uniq(Enum.filter(get_in(aa, [Access.all(), "name"]), fn x -> x != nil end)) %>
+              <% handicaps = Enum.uniq(Enum.filter(get_in(aa, [Access.all(), "handicap"]), fn x -> x != nil end)) %>
+              <% boulhandicap =  List.first(get_in(aa, [Access.all(), "handicap"])) %>
+              <%= if boulhandicap != nil && boulhandicap != -1 && boulhandicap != 1 do %>
+                <div>
+                  <div  class="MG">
+                    <h2><%= value1["name"] %></h2>
+                    <div> <i class="fa-regular fa-star"></i><i class="fa-solid fa-chevron-down"></i></div>
+                  </div>
+                  <div class="MG-under-list">
+                    <div class="lign-1"> <div>&nbsp;</div><%= for odd <- odds do %> <div><%= odd %></div><% end %></div>
+                      <%= for handicap <- handicaps do %>
+                        <div class="lign-2"><div><%= handicap %></div>
+                          <%= for {key2, value2} <- value1["participants"] do %>
+                            <%= if value2["handicap"] && value2["handicap"] == handicap do %>
+                              <div class="first"
+                              <%= if value2["suspend"] == "1" do %>
+                                phx-disable-with="Sending..."
+                                style=" color:black;"
+                              <% end %>
+                                phx-click="add_odd_betslip"
+                                phx-value-sport_id=<%= get_in(fdata, [@match_id, "info", "sport"]) %>
+                                phx-value-match_id=<%= @match_id %>
+                                phx-value-market_id=<%= value1["id"] %>
+                                phx-value-odd_name=<%= value2["name"] %>
+                                phx-value-odd_name2=<%=value2["handicap"] %>
+
+                                ><%= value2["value_eu"] %>
+
+
+
+                              </div>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                <% else %>
+
+
+
+        <%= if value1["name"] != "Final Score" && value1["name"] != "Correct Score (1st Half)" do %>
+
+            <div>
+          <div  class="FR">
+             <h2><%= value1["name"] %></h2>
+          <div>  <i class="fa-regular fa-star"></i><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="FR-under-list">
+            <%= if value1["participants"] != nil do %>
+              <%= for {key2, value2} <- value1["participants"] do %>
+              <div phx-click="add_odd_betslip"
+                   phx-value-sport_id=<%= get_in(fdata, [@match_id, "info", "sport"]) %>
+                   phx-value-match_id=<%= @match_id %>
+                   phx-value-market_id=<%=value1["id"] %>
+                   phx-value-odd_name=<%=Enum.join([String.replace(value2["name"] , " ", "-"), value2["handicap"]], ":") %>
+              >
+              <span><%= value2["name"] %> <%=  value2["handicap"]%></span>
+              <span><%= value2["value_eu"]%></span>
+              </div>
+            <% end %>
+            </div>
+            </div>
+
+
+           <% end %>
+        <% end %>
+
+      <!----------------Match Goals -------------->
+
+
+
+        <% end %>
+                  <!---------------------------- Double Chance ------------------------>
+
+
+
+       <% end %>
+       <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+
+
+
+                <!----------------Final Score -------------->
+                <div class="tenth-MG-list">
+                  <div  class="MG">
+                      <h2>Final Score</h2>
+                   <div> <i class="fa-regular fa-star"></i>
+                     <i class="fa-solid fa-chevron-down"></i></div>
+                   </div>
+                 <div class="two-lists">
+                  <div class="slider-all">
+                    <div class="slider on">Slider</div>
+                   <div class="all "> All </div>
+                 </div>
+                   <div class="MG-under-list-slider active">
+                    <div class="lign-1">  <div>Belguim</div><div>Canada</div><div>&nbsp;</div></div>
+                    <div class="lign-3">
+                      <div><div><i class="fa-sharp fa-solid fa-minus"></i></div><div class="number">1</div>  <div><i class="fa-sharp fa-solid fa-plus"></i>  </div></div>
+                  <div> <div><i class="fa-sharp fa-solid fa-minus"></i></div><div class="number">1</div>  <div><i class="fa-sharp fa-solid fa-plus"></i> </div></div>
+                       <div class="cotes">1.6444</div>
+                       </div>
+                  </div>
+                  <div class="MG-under-list-all not-active">
+                    <div class="lign-1"> <div>1</div> <div>X</div><div>2</div></div>
+                    <div class="lign-2"><div><span>1.5</span><span>1.2558</span></div><div><span>1.5</span><span>1.2558</span></div>  <div><span>1.5</span><span>1.2558</span></div></div>
+                    <div class="lign-2"><div><span>1.5</span><span>1.2558</span></div><div><span>1.5</span><span>1.2558</span></div>  <div><span>1.5</span><span>1.2558</span></div></div>
+                    <div class="lign-2"><div><span>1.5</span><span>1.2558</span></div><div><span>1.5</span><span>1.2558</span></div>  <div><span>1.5</span><span>1.2558</span></div></div>
+                    <div class="lign-2"><div><span>1.5</span><span>1.2558</span></div><div><span>1.5</span><span>1.2558</span></div>  <div><span>1.5</span><span>1.2558</span></div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+         </div>
+        <div class="in-play-live-matches-body-bet-builder " >
+
+        </div>
+        <div class="in-play-live-matches-body-asian-lines">
+                   <!----------------Asian Corners-------------->
+                   <div class="eighth-MG-list">
+                    <div  class="MG">
+                        <h2>Asian Corners</h2>
+                     <div> <i class="fa-regular fa-star"></i>
+                       <i class="fa-solid fa-chevron-down"></i></div>
+                     </div>
+                     <div class="MG-under-list">
+                      <div class="lign-1"> <div>&nbsp;</div> <div>Over</div><div>Under</div></div>
+                      <div class="lign-2"><div>1.5</div><div class="first">1.83</div>  <div class="second">1.83</div></div>
+                      <div class="lign-2"><div>1.5</div><div class="first">1.83</div>  <div class="second">1.83</div></div>
+                      <div></div>
+                    </div>
+                  </div>
+
+        </div>
+        <div class="in-play-live-matches-body-goals">
+               <!---------------- 1st Goal  -------------->
+               <div class="third-DC-list" >
+                <div class="DC">
+                    <h2>1st Goal </h2>
+                <div> <i class="fa-regular fa-star"></i>
+                   <i class="fa-solid fa-chevron-down"></i></div>
+                 </div>
+                 <div class="DC-under-list">
+                  <div>   <span>Millonarios</span><span>1.002</span></div>
+                  <div><span>No 3rd Goal</span><span>1.20</span></div>
+                <div>  <span>Deportivo Poreira</span><span>10.00  </span></div>
+
+
+                </div>
+              </div>
+         <!----------------Match Goals -------------->
+        <div>
+          <div  class="MG">
+              <h2>Match Goals</h2>
+           <div> <i class="fa-regular fa-star"></i>
+             <i class="fa-solid fa-chevron-down"></i></div>
+           </div>
+           <div class="MG-under-list">
+            <div class="lign-1"> <div>&nbsp;</div> <div>Over</div><div>Under</div></div>
+            <div class="lign-2"><div>1.5</div><div class="first">1.83</div>  <div class="second">1.83</div></div>
+            <div></div>
+          </div>
+        </div>
+          <!----------------First Half Goals -------------->
+          <div  class="second-MG-list">
+            <div  class="MG">
+                <h2>First Half Goals</h2>
+             <div> <i class="fa-regular fa-star"></i>
+               <i class="fa-solid fa-chevron-down"></i></div>
+             </div>
+             <div class="MG-under-list">
+              <div class="lign-1"> <div>&nbsp;</div> <div>Over</div><div>Under</div></div>
+              <div class="lign-2"><div>1.5</div><div class="first">1.83</div>  <div class="second">1.83</div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div class="in-play-live-matches-body-half">
+            <!---------------- 1st Goal  -------------->
+            <div class="third-DC-list">
+              <div class="DC">
+                  <h2>1st Goal </h2>
+              <div> <i class="fa-regular fa-star"></i>
+                 <i class="fa-solid fa-chevron-down"></i></div>
+               </div>
+               <div class="DC-under-list">
+                <div>   <span>Millonarios</span><span>1.002</span></div>
+                <div><span>No 3rd Goal</span><span>1.20</span></div>
+              <div>  <span>Deportivo Poreira</span><span>10.00  </span></div>
+
+
+              </div>
+            </div>
+       <!----------------Match Goals -------------->
+      <div>
+        <div  class="MG">
+            <h2>Match Goals</h2>
+         <div> <i class="fa-regular fa-star"></i>
+           <i class="fa-solid fa-chevron-down"></i></div>
+         </div>
+         <div class="MG-under-list">
+          <div class="lign-1"> <div>&nbsp;</div> <div>Over</div><div>Under</div></div>
+          <div class="lign-2"><div>1.5</div><div class="first">1.83</div>  <div class="second">1.83</div></div>
+          <div></div>
+        </div>
+      </div>
+
+        </div>
+        <div class="in-play-live-matches-body-minutes">
+
+  <!---------------- 1st Goal  -------------->
+  <div class="third-DC-list" >
+    <div class="DC">
+        <h2>1st Goal </h2>
+    <div> <i class="fa-regular fa-star"></i>
+       <i class="fa-solid fa-chevron-down"></i></div>
+     </div>
+     <div class="DC-under-list">
+      <div>   <span>Millonarios</span><span>1.002</span></div>
+      <div><span>No 3rd Goal</span><span>1.20</span></div>
+    <div>  <span>Deportivo Poreira</span><span>10.00  </span></div>
+
+
+    </div>
+  </div> -->
+<!----------------Match Goals -------------->
+<div>
+<div  class="MG">
+  <h2>Match Goals</h2>
+<div> <i class="fa-regular fa-star"></i>
+ <i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="MG-under-list">
+<div class="lign-1"> <div>&nbsp;</div> <div>Over</div><div>Under</div></div>
+<div class="lign-2"><div>1.5</div><div class="first">1.83</div>  <div class="second">1.83</div></div>
+<div></div>
+</div>
+</div>
+        </div>
+        </div>
+        <div class="in-play-live-matches-games-part"></div>
+        <div class="in-play-live-matches-settings"></div>
+        <div class="in-play-live-matches-footer"></div>
+
+
+       </section>
+
+
+       <%= if @data do %>
+    <% fdata = case @sport do
+       nil ->
+        @data.latest_block
+      "default" ->
+        %{}
+      "basket" ->
+        @data.basket_data
+      "soccer" ->
+        @data.latest_block
+      "close" ->
+        @data.latest_block
+      [] ->
+       @data.latest_block
+    end %>
+
+
+
+       <section class="in-play-live-tracker">
+       <div class="soccer-tracker">
+        <div class="header">
+        <a href=""> <i class="fa-solid fa-chevron-left"></i></a>
+          <h2 class="first"><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "name"])), " vs "),0)%></h2>
+          <div><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "score"])), ":"),0)%></div>
+          <div><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "score"])), ":"),1)%></div>
+          <h2 class="second"><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "name"])), " vs "),1)%></h2>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+
+        <!--------------------------responsive up right match menu----------------------->
+        <section class="match-list is-clicked">
+        <section class="item-1 one">
+          <div  class="first-part">
+            <h4> England premier league</h4>
+              <span class="fas fa-caret-down"></span>
+          </div>
+
+          <section class="second-part one">
+            <time>80:23</time>
+
+             <section class="first-part">
+             <p> Fulhan </p>
+             <p> man utd </p>
+           </section>
+
+
+            <i class="fa-solid fa-volume-high"></i>
+                 <section class="goals">
+                   <p>1</p>
+                   <p>2</p>
+                 </section>
+                 <i class="fa-regular fa-star"></i>
+
+                </section>
+    </section>
+    <section class="item-1 two">
+      <div  class="first-part">
+     <h4> England premier league</h4>
+      <span class="fas fa-caret-down"></span>
+      <i class="fa-regular fa-star"></i>
+      </div>
+
+      <section class="second-part two">
+        <time>80:23</time>
+
+         <section class="first-part">
+         <p> Fulhan </p>
+         <p> man utd </p>
+       </section>
+
+
+        <i class="fa-solid fa-volume-high"></i>
+             <section class="goals">
+               <p>1</p>
+               <p>2</p>
+             </section>
+             <i class="fa-regular fa-star"></i>
+
+            </section>
+</section>
+<section class="item-1 three">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part three">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+<section class="item-1 four">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part four">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+<section class="item-1 five">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part five">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+<section class="item-1 six">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part six">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+
+      </section>
+
+      <!--------------------------responsive up right match menu----------------------->
+
+
+        <div class="tracker-part active">
+        <!--   <svg class="tracker"></svg> -->
+          <img src="<%=Routes.static_path(@socket,"/assets/images/screenshots/sc1.png")%>">
+          <a href="#"> Show match info</a>
+        </div>
+
+
+        <div class="st-T-line">
+         <div class="stats-timeline">
+           <div class="active hidden">Live</div>
+            <div class="active default">Stats</div>
+            <div>Timeline</div>
+            <i class="fa-solid fa-chart-simple"></i>
+
+           </div>
+
+        <div class="stats">
+          <img src="<%=Routes.static_path(@socket,"/assets/images/screenshots/sc2.png")%>">
+        </div>
+        <div class="timeline">
+        </div>
+      </div>
+      </div>
+      <div class="my-bets">
+
+       <div class="first-lign"><h2>MY BETS</h2> <div><div>cashout</div><i class="fa-solid fa-chevron-down"></i></div></div>
+       <div>bets that can be fully or partially cashed out appear here </div>
+
+
+       <%= if @shopping_cart do %>
+         <%= for value <- @shopping_cart do%>
+          <%= if value["sport_id"] == "soccer" do %>
+          <div class="cards">
+          <i class="fa-solid fa-xmark" phx-click="remove_odd_betslip"
+                                         phx-value-market_id=<%= value["market_id"] %>
+                                         phx-value-handicap=<%= value["odd_name"] %>
+                                         style="FLOAT: RIGHT;"></i>
+
+          <%= if get_in( @data.latest_block, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+          <%= for {key1, value1} <- get_in( @data.latest_block, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+            <%#= String.replace(value1["name"] , " ", "-") %><%#= String.replace(value["odd_name"] , " ", "-") %>
+            <%=if  String.replace(value1["name"] , " ", "-") == String.replace(String.replace(value["odd_name"] , " ", "-"),":","")
+            && value1["handicap"] == value["odd_name2"] do %>
+            <div class="cotes"><div><%= value1["name"] %>
+                                    <%= if value1["name"] do %>
+                                    <%= value1["handicap"] %>
+                                    <% end %>
+                                    <%= value1["value_eu"] %>
+                                    </div></div>
+
+            <% end %>
+          <% end %> <!-----for {key1, value1}------->
+          <% else %>
+            <div style="color:red;"> Cette cote n'est plus disponible !</div>
+          <% end %>
+        <div><%=get_in( @data.latest_block, [value["match_id"], "odds", value["market_id"], "name"]) %></div>
+        <div><%=get_in( @data.latest_block, [value["match_id"], "info", "name"]) %></div>
+       </div>
+
+
+          <% end %> <!-----for value <- @shopping_cart------->
+
+          <%= if value["sport_id"] == "Basketball" do %>
+
+           <div class="cards">
+            <i class="fa-solid fa-xmark" phx-click="remove_odd_betslip"
+                                         phx-value-market_id=<%= value["market_id"] %>
+                                         phx-value-handicap=<%= value["odd_name"] %>
+                                         ></i>
+           <%= if get_in( @data.basket_data, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+          <%= for {key1, value1} <- get_in( @data.basket_data, [value["match_id"], "odds", value["market_id"], "participants"]) do %>
+
+            <%#= String.replace(value1["name"] , " ", "-") %><%#= String.replace(value["odd_name"] , " ", "-") %>
+
+            <%=if  String.replace(value1["name"] , " ", "-") == String.replace(value["odd_name"] , " ", "-")
+              && value["odd_name2"] == value1["handicap"]do %>
+            <div class="cotes"><div><%= value1["name"] %>
+                                    <%= if value1["handicap"] do %>
+                                    <%= value1["handicap"] %>
+                                    <%= end %>
+                                    <%= value1["value_eu"] %>
+                                    </div>
+                                    </div>
+          <% end %>
+          <% end %>
+          <% else %>
+            <div style="color:red;"> Cette cote n'est plus disponible !</div>
+          <% end %>
+        <div><%=get_in( @data.basket_data, [value["match_id"], "odds", value["market_id"], "name"]) %></div>
+        <div><%=get_in( @data.basket_data, [value["match_id"], "info", "name"]) %></div>
+       </div>
+
+          <% end %>
+       <% end %>
+      <% end %>
+
+       <div class="cards">
+        <div class="cotes"><div>under 2.5</div><i class="fa-solid fa-xmark"></i></div>
+        <div>Match Goals</div>
+        <div>cagliari v parma</div>
+       </div>
+     <div class="inputs"> <div> bet  <input type="text"></div>   <div>  <input type="text"> revenues possible</div></div>
+
+       <button type="button">place bet</button>
+
+
+      </div>
+
+      <% end %>
+
+
+
+
+      <section class="part-2" >
+
+
+        <h2><i class="fa-solid fa-asterisk"></i>Offers</h2>
+        <div class="part-2-parag">
+        <div>
+          <p> 2 Goals Ahead Early Payout</p>
+          <p>get bets paid out early , new and eligible customers only </p>
+          <p> more details</p>
+        </div>
+        <div>
+          <p> 2 Goals Ahead Early Payout</p>
+          <p>get bets paid out early , new and eligible customers only </p>
+          <p> more details</p>
+        </div>
+        <div>
+          <p> 2 Goals Ahead Early Payout</p>
+          <p>get bets paid out early , new and eligible customers only </p>
+          <p> more details</p>
+        </div>
+      </div>
+      </section>
+
+      <section class="part-3">
+        <h2><i class="fa fa-bolt fa-fw fa-2x"></i> Features</h2>
+        <div class="part-2-parag">
+        <div class="part-2-parag-1">
+
+        <div> <p> Soccer bet builder</p>
+          <p>get bets paid out early , new and eligible customers only </p>
+          <p> more details</p></div>
+          <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/icon1.png")%>">
+        </div>
+        <div class="part-2-parag-1">
+          <div> <p> live streaming highlights</p>
+          <p>get bets paid out early , new and eligible customers only </p>
+          <p> more details</p></div>
+          <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/icon2.png")%>">
+        </div>
+        <div class="part-2-parag-1">
+          <div> <p> cash out </p>
+          <p>get bets paid out early , new and eligible customers only </p>
+          <p> more details</p></div>
+          <img src="<%=Routes.static_path(@socket,"/assets/images/sports-icon/icon3.png")%>">
+        </div>
+      </div>
+      </section>
+
+
+       </section>
+
+     </section>
+
+
+
+aa
+
+<!-- ---- ----- ----- ---- ----- ---- ---- ---- ----  -->
+
+<div>
+<div id="content">
+<table>
+  <% aa= Map.values(@data.latest_block)  %>
+
+  <% bb = Enum.uniq(get_in(aa, [Access.all(), "info","league"])) %>
+  <%= for league <- bb do %>
+  <td><h2><%= league %></h2></td>
+
+  <%= for {key, value} <- @data.latest_block do %>
+      <%= if value["info"]["league"] == league do %>
+        <tr style="background-color:#0098d32e;">
+          <td><button phx-click="match_id" value=<%= key %> ><%= key %></button></td>
+          <td><h3><%= value["info"]["name"] %></h3></td>
+          <td><%= value["info"]["score"] %></td>
+          <td><%= value["info"]["seconds"] %></td>
+          <td><%= value["info"]["ball_pos"] %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+<table>
+</div>
+
+<div style="float: left;">
+  <%= if @data do %>
+    <div class="block_time">
+      <table>
+        <%= for {key, value}<- @data.latest_block do %>
+        <%=if key ==  @match_id do %>
+          <tr style="background-color:#0098d32e;">
+          <td><h3><%= value["info"]["name"] %></h3></td>
+          <td><%= value["info"]["score"] %></td>
+          <td><%= value["info"]["seconds"] %></td>
+        <td>
+        <%= for {key1, value1} <- value["odds"] do %>
+          <tr>
+            <td style="color:red;" colspan = "4"><%= value1["name"] %></td>
+          </tr>
+          <%= if value1["participants"] != nil do %>
+            <%= for {key2, value2} <- value1["participants"] do %>
+              <%=if  Enum.count(value1["participants"]) <= 3 do %>
+                <td><%= value2["name"]%> <%=value2["handicap"]%></td>
+                <td style="color:red;"><%= value2["value_eu"]%></td>
+            <% else %>
+            <tr>
+              <td style="color:green;">Suspend :<%= value2["suspend"]%></td>
+              <td><%= value2["name"]%> <%=value2["handicap"]%></td>
+              <td style="color:red;"><%= value2["value_eu"]%></td>
+            </tr>
+          <% end %>
+          <% end %>
+          <% end %>
+        </tr>
+        <% end %>
+      </td>
+      </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+<% end %>
+
+</div>
+
+
+
+
+</div>

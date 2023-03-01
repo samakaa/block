@@ -1,0 +1,372 @@
+
+<section class="in-play-live-list" id={@id}>
+<div>
+          <img src={Routes.static_path(@socket,"/assets/images/horizontal-list/colors/star-color.png")}>
+          <h1> Favourites</h1>
+        </div>
+        <div>
+            <p> select a star below to add leagues and events here </p>
+        </div>
+        <div class="sportclick" phx-click="sport" phx-value-value="soccer">
+          <div></div>
+            <img src={Routes.static_path(@socket,"/assets/images/horizontal-list/colors/soccer-color.png")}>
+            <h1>Soccer</h1>
+        </div>
+        <!-- for the inside list -->
+      <section  class="match-list" style={if @sport_menu == "soccer" do 'display:block' else 'display:none' end}>
+      <% aa = Map.values(@data.latest_block) %>
+      <% bb = Enum.uniq(get_in(aa, [Access.all(), "info","league"])) %>
+      <%= for league <- bb do %>
+        <section class="item-1 one">
+          <div  class="first-part">
+            <h5 phx-click="league" phx-value-league= {String.replace(league, " ", "-")} > <%= league %></h5>
+            <i class="fa-regular fa-star"></i>
+          </div>
+        <%= for {key, value}<- @data.latest_block do %>
+          <%= if @league == String.replace(value["info"]["league"] , " ", "-") do %>
+            <section class={if @sport && @league == String.replace(league, " ", "-"), do: "second-part one is-clicked", else: "second-part one is-not"}>
+
+              <time><%= value["info"]["seconds"] %></time>
+              <section class="first-part">
+                <p phx-click="match_id" phx-value-value= {key} phx-value-sport="soccer">
+                <%= value["info"]["name"] %>
+                </p>
+              </section>
+              <i class="fa-solid fa-volume-high"></i>
+              <section class="goals">
+                <p><%= value["info"]["score"] %></p>
+              </section>
+              <i class="fa-regular fa-star"></i>
+            </section>
+          <% end %>
+        <% end %>
+      </section>
+    <% end %>
+  </section>
+  <div>
+    <img src={Routes.static_path(@socket,"/assets/images/horizontal-list/colors/tennis-color.png")}>
+    <!-- <img src="<%BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/horizontal-list/colors/tennis-color.png")%>">-->
+      <h1>Tennis</h1>
+      </div>
+      <section class="tennis-list">
+        <h1>Tennis</h1>
+        <section class="item-1 one tennis">
+          <div  class="first-part">
+            <h4> England premier league</h4>
+            <span class="fas fa-caret-down"></span>
+            <i class="fa-regular fa-star"></i>
+          </div>
+            <section class="second-part one">
+              <time>80:23</time>
+              <section class="first-part">
+               <p> Fulhan </p>
+               <p> man utd </p>
+             </section>
+             <i class="fa-solid fa-volume-high"></i>
+             <section class="goals">
+              <p>1</p>
+              <p>2</p>
+            </section>
+            <i class="fa-regular fa-star"></i>
+          </section>
+      </section>
+    </section>
+<!--------------------------------------------------------alpine---------------------->
+<div>
+    <!--<img src="<%BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/alpine.png")%>">-->
+    <img src={Routes.static_path(@socket,"/assets/images/sports-icon/alpine.png")}>
+          <h1>Alpine Skiing</h1>
+       </div>
+       <section class="alpine-list">
+        <h1>alpine skiing</h1>
+    <section class="item-1 one alpine">
+      <div  class="first-part">
+     <h4> semmering-slalom </h4>
+     <section> <span class="fas fa-caret-down"></span>
+      <i class="fa-regular fa-star"></i></section>
+      </div>
+  </section>
+</section>
+<!--------------------------------------------------------alpine---------------------->
+<!-------------------------------------------------------------basket------------------------------------------->
+ <div  phx-click="sport" phx-value-value="basket">
+    <img src={Routes.static_path(@socket,"/assets/images/sports-icon/basketball.png")}>
+    <!--<img src="<%BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/basketball.png")%>">-->
+    <h1>Basketball</h1>
+</div>
+<section class="basketball-list" style={if @sport_menu == "basket" do 'display:block;' else 'display:none' end }>
+<% aa= Map.values(@data.basket_data)  %>
+  <% bb = Enum.uniq(get_in(aa, [Access.all(), "info","league"])) %>
+  <%= for league <- bb do %>
+
+      <section class="item-1 one">
+        <div  class="first-part">
+          <h5 phx-click="league" phx-value-league = { String.replace(league, " ", "-") } > <%= league %></h5>
+            <i class="fa-regular fa-star"></i>
+        </div>
+
+
+          <%= for {key, value}<- @data.basket_data do %>
+          <%= if @league == String.replace(value["info"]["league"] , " ", "-") do %>
+          <% cmp = String.replace(league, " ", "-") %>
+
+          <section class={if @sport && @league == String.replace(league, " ", "-"), do: "second-part one is-clicked", else: "second-part one is-not"}>
+            <time><%= value["info"]["seconds"] %></time>
+            <section class="first-part">
+             <p phx-click="match_id" phx-value-value= { key } phx-value-sport="basket"> <%= value["info"]["name"] %></p>
+
+          </section>
+          <i class="fa-solid fa-volume-high"></i>
+          <section class="goals">
+            <p><%= value["info"]["score"] %></p>
+          </section>
+          <i class="fa-regular fa-star"></i>
+          </section>
+          <% end %>
+        <% end %>
+      </section>
+    <% end %>
+
+
+  <section class="item-1 six basketball">
+<div  class="first-part">
+<h4> England premier league</h4>
+<span class="fas fa-caret-down"></span>
+<i class="fa-regular fa-star"></i>
+</div>
+
+<section class="second-part six">
+<time>80:23</time>
+
+<section class="first-part">
+<p> Fulhan </p>
+<p> man utd </p>
+</section>
+
+
+<i class="fa-solid fa-volume-high"></i>
+   <section class="goals">
+     <p>1</p>
+     <p>2</p>
+   </section>
+   <i class="fa-regular fa-star"></i>
+
+  </section>
+</section>
+</section>
+<!----------------------------------BASKET----------------------------------->
+<!----------------------------beach volleyball------------------------------->
+ <div>
+ <!--<img src="<%BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/Voleyball.png")%>"> -->
+ <img src={Routes.static_path(@socket,"/assets/images/sports-icon/Voleyball.png")}>
+    <h1>beach volleyball</h1>
+</div>
+
+<section class="volleyball-list">
+  <h1>beach volleyball</h1>
+  <section class="item-1 one volleyball">
+    <div  class="first-part">
+   <h4> England premier league</h4>
+    <span class="fas fa-caret-down"></span>
+    <i class="fa-regular fa-star"></i>
+    </div>
+    <section class="second-part one">
+      <time>80:23</time>
+
+       <section class="first-part">
+       <p> Fulhan </p>
+       <p> man utd </p>
+     </section>
+      <i class="fa-solid fa-volume-high"></i>
+           <section class="goals">
+             <p>1</p>
+             <p>2</p>
+           </section>
+           <i class="fa-regular fa-star"></i>
+            </section>
+</section>
+</section>
+<!----------------------------beach volleyball------------------------------->
+<!---------------------------------Cricket----------------------------------->
+<div>
+<!--<img src="<%=BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/cricket.png")%>">-->
+<img src={Routes.static_path(@socket,"/assets/images/sports-icon/cricket.png")}>
+  <h1>Cricket</h1>
+</div>
+<section class="cricket-list">
+       <h1>Cricket</h1>
+<section class="item-1 six cricket">
+<div  class="first-part">
+<h4> England premier league</h4>
+<span class="fas fa-caret-down"></span>
+<i class="fa-regular fa-star"></i>
+</div>
+<section class="second-part six">
+<time>80:23</time>
+<section class="first-part">
+<p> Fulhan </p>
+<p> man utd </p>
+</section>
+<i class="fa-solid fa-volume-high"></i>
+   <section class="goals">
+     <p>1</p>
+     <p>2</p>
+   </section>
+   <i class="fa-regular fa-star"></i>
+
+  </section>
+</section>
+
+</section>
+<!---------------------------------Cricket----------------------------------->
+<!----------------------------------Darts------------------------------------>
+<div>
+<!--<img src="<%BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/target.png")%>">-->
+<img src={Routes.static_path(@socket,"/assets/images/sports-icon/cricket.png")}>
+  <h1>Darts</h1>
+</div>
+<section class="darts-list">
+  <h1>Darts</h1>
+<section class="item-1 six darts">
+<div  class="first-part">
+<h4> England premier league</h4>
+<span class="fas fa-caret-down"></span>
+<i class="fa-regular fa-star"></i>
+</div>
+<section class="second-part six">
+<time>80:23</time>
+<section class="first-part">
+<p> Fulhan </p>
+<p> man utd </p>
+</section>
+<i class="fa-solid fa-volume-high"></i>
+   <section class="goals">
+     <p>1</p>
+     <p>2</p>
+   </section>
+   <i class="fa-regular fa-star"></i>
+</section>
+</section>
+</section>
+
+<!----------------------------------Darts------------------------------------>
+<!---------------------------------Esports----------------------------------->
+
+<div>
+  <!--<img src="<%=BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/gamepad.png")%>">-->
+  <img src={Routes.static_path(@socket,"/assets/images/sports-icon/gamepad.png")}>
+  <h1>Esports</h1>
+</div>
+<section class="esports-list">
+  <h1>Esports</h1>
+
+  <section class="item-1 one esports">
+    <div  class="first-part">
+   <h4> England premier league</h4>
+    <span class="fas fa-caret-down"></span>
+    <i class="fa-regular fa-star"></i>
+    </div>
+
+    <section class="second-part one">
+      <time>80:23</time>
+
+       <section class="first-part">
+       <p> Fulhan </p>
+       <p> man utd </p>
+     </section>
+
+
+      <i class="fa-solid fa-volume-high"></i>
+           <section class="goals">
+             <p>1</p>
+             <p>2</p>
+           </section>
+           <i class="fa-regular fa-star"></i>
+
+          </section>
+</section>
+<section class="item-1 two esports">
+<div  class="first-part">
+<h4> England premier league</h4>
+<span class="fas fa-caret-down"></span>
+<i class="fa-regular fa-star"></i>
+</div>
+
+<section class="second-part two">
+  <time>80:23</time>
+  <section class="first-part">
+   <p> Fulhan </p>
+   <p> man utd </p>
+ </section>
+  <i class="fa-solid fa-volume-high"></i>
+       <section class="goals">
+         <p>1</p>
+         <p>2</p>
+       </section>
+       <i class="fa-regular fa-star"></i>
+  </section>
+</section>
+</section>
+<!----------------------------------Esports------------------------------------->
+<!---------------------------------Greyhounds----------------------------------->
+ <div>
+ <!--<img src="<%=BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/greyhound.png")%>"> -->
+ <img src={Routes.static_path(@socket,"/assets/images/sports-icon/greyhound.png")}>
+  <h1> Greyhounds </h1>
+</div>
+<section class="greyhounds-list">
+  <h1> Greyhounds </h1>
+  <section class="item-1 one greyhounds">
+    <div  class="first-part">
+   <h4> England premier league</h4>
+    <span class="fas fa-caret-down"></span>
+    <i class="fa-regular fa-star"></i>
+    </div>
+    <section class="second-part one">
+      <time>80:23</time>
+    <section class="first-part">
+       <p> Fulhan </p>
+       <p> man utd </p>
+     </section>
+      <i class="fa-solid fa-volume-high"></i>
+           <section class="goals">
+             <p>1</p>
+             <p>2</p>
+           </section>
+           <i class="fa-regular fa-star"></i>
+      </section>
+</section>
+</section>
+<!---------------------------------Greyhounds----------------------------------->
+<!-----------------------------------Hockey------------------------------------->
+<div>
+  <!--<img src="<%=BlockclockWeb.Router.Helpers.static_path(@socket,"/assets/images/sports-icon/hockey.png")%>">-->
+  <img src={Routes.static_path(@socket,"/assets/images/sports-icon/hockey.png")}>
+  <h1>Hockey</h1>
+</div>
+<section class="hockey-list">
+  <h1>  Hockey</h1>
+  <section class="item-1 one hockey">
+    <div  class="first-part">
+   <h4> England premier league</h4>
+    <span class="fas fa-caret-down"></span>
+    <i class="fa-regular fa-star"></i>
+    </div>
+    <section class="second-part one">
+      <time>80:23</time>
+      <section class="first-part">
+       <p> Fulhan </p>
+       <p> man utd </p>
+     </section>
+    <i class="fa-solid fa-volume-high"></i>
+           <section class="goals">
+             <p>1</p>
+             <p>2</p>
+           </section>
+           <i class="fa-regular fa-star"></i>
+</section>
+</section>
+</section>
+
+
+</section>

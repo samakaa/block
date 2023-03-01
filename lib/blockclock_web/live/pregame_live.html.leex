@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+
+        <!-- Slick Carousel -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+   <! ---- <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css
+    "/>
+  -->
+
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7c9f7145d8.js" crossorigin="anonymous"></script>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="main-style.css" />
+    <link rel="shortcut icon" type="image/png" href="C:\Users\hp\Desktop\boomba.bet\up\images\favicon.png"/>
+
+    <title>Boombabet | Sports | Jeux | Jeux d'adresse</title>
+  </head>
+
+  <body>
+ <!-------------------------------------------- navbar --------------------------------------------------->
+    <main>
+
+     <%= live_component BlockclockWeb.Topmenu %>
+
+    </main>
+    <!-------------------------------------------- navbar --------------------------------------------------->
+     <!-------------------------------------------- main part --------------------------------------------------->
+     <div class="main-3-columns">
+
+        <!-------------------------------------------- left list menu + filter  --------------------------------------------------->
+
+        <section class="left-list-menu-filter">
+
+          <%= live_component BlockclockWeb.LeftSporsMenuFilter %>
+
+        </section>
+     <!-------------------------------------------- left list menu + filter  --------------------------------------------------->
+          <!-------------------------------------------- middle part   --------------------------------------------------->
+        <section class="middle">
+      <!-------------------------------------------- header  --------------------------------------------------->
+        <% content = case @selection do
+          "default" ->
+            live_component BlockclockWeb.Soccer.GroupSelectionLive, soccerlist: @soccerlist
+          "topleagues" ->
+            live_component BlockclockWeb.Soccer.SoccerTopleagueLive, soccerlist: @soccerlist
+          "soccer_match" ->
+            live_component BlockclockWeb.Soccer.SoccerShowMatchLive, match: @match, match_id: @match_id, selection: @selection
+        end %>
+        <%= content %>
+
+
+
+        <footer>
+             hello world
+        </footer>
+     </section>
+        <!-------------------------------------------- middle part   --------------------------------------------------->
+     <!-------------------------------------------- offers + features menu   --------------------------------------------------->
+
+        <div class="right-part-2">
+
+        <div class="right-part-2">
+        <!----------------------integration------------------------------->
+        <%= if @data do %>
+    <% fdata = case @sport do
+       nil ->
+        @data.latest_block
+      "default" ->
+        %{}
+      "basket" ->
+        @data.basket_data
+      "soccer" ->
+        @data.latest_block
+      "close" ->
+        @data.latest_block
+      [] ->
+       @data.latest_block
+    end %>
+
+
+
+       <section class="in-play-live-tracker">
+       <div class="soccer-tracker">
+        <div class="header">
+        <a href=""> <i class="fa-solid fa-chevron-left"></i></a>
+          <h2 class="first"><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "name"])), " vs "),0)%></h2>
+          <div><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "score"])), ":"),0)%></div>
+          <div><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "score"])), ":"),1)%></div>
+          <h2 class="second"><%= Enum.at(String.split(Kernel.inspect(get_in(fdata, [@match_id, "info", "name"])), " vs "),1)%></h2>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+
+        <!--------------------------responsive up right match menu----------------------->
+        <section class="match-list is-clicked">
+        <section class="item-1 one">
+          <div  class="first-part">
+            <h4> England premier league</h4>
+              <span class="fas fa-caret-down"></span>
+          </div>
+
+          <section class="second-part one">
+            <time>80:23</time>
+
+             <section class="first-part">
+             <p> Fulhan </p>
+             <p> man utd </p>
+           </section>
+
+
+            <i class="fa-solid fa-volume-high"></i>
+                 <section class="goals">
+                   <p>1</p>
+                   <p>2</p>
+                 </section>
+                 <i class="fa-regular fa-star"></i>
+
+                </section>
+    </section>
+    <section class="item-1 two">
+      <div  class="first-part">
+     <h4> England premier league</h4>
+      <span class="fas fa-caret-down"></span>
+      <i class="fa-regular fa-star"></i>
+      </div>
+
+      <section class="second-part two">
+        <time>80:23</time>
+
+         <section class="first-part">
+         <p> Fulhan </p>
+         <p> man utd </p>
+       </section>
+
+
+        <i class="fa-solid fa-volume-high"></i>
+             <section class="goals">
+               <p>1</p>
+               <p>2</p>
+             </section>
+             <i class="fa-regular fa-star"></i>
+
+            </section>
+</section>
+<section class="item-1 three">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part three">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+<section class="item-1 four">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part four">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+<section class="item-1 five">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part five">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+<section class="item-1 six">
+  <div  class="first-part">
+ <h4> England premier league</h4>
+  <span class="fas fa-caret-down"></span>
+  <i class="fa-regular fa-star"></i>
+  </div>
+
+  <section class="second-part six">
+    <time>80:23</time>
+
+     <section class="first-part">
+     <p> Fulhan </p>
+     <p> man utd </p>
+   </section>
+
+
+    <i class="fa-solid fa-volume-high"></i>
+         <section class="goals">
+           <p>1</p>
+           <p>2</p>
+         </section>
+         <i class="fa-regular fa-star"></i>
+
+        </section>
+</section>
+
+      </section>
+
+      <!--------------------------responsive up right match menu----------------------->
+          <div class="tracker-part active">
+        <!--   <svg class="tracker"></svg> -->
+          <img src="<%=Routes.static_path(@socket,"/assets/images/screenshots/sc1.png")%>">
+          <a href="#"> Show match info</a>
+        </div>
+
+
+        <div class="st-T-line">
+         <div class="stats-timeline">
+           <div class="active hidden">Live</div>
+            <div class="active default">Stats</div>
+            <div>Timeline</div>
+            <i class="fa-solid fa-chart-simple"></i>
+
+           </div>
+
+        <div class="stats">
+          <img src="<%=Routes.static_path(@socket,"/assets/images/screenshots/sc2.png")%>">
+        </div>
+        <div class="timeline">
+        </div>
+      </div>
+      </div>
+          <%= live_component BlockclockWeb.BetslipLive, shopping_cart: @shopping_cart, data: @data %>
+
+        <% end %><!-----if shopping_cart------->
+
+
+
+         <section class="part-4">
+
+
+             <h2><i class="fa-solid fa-asterisk"></i>Offers</h2>
+             <div class="part-2-parag">
+             <div>
+               <p> 2 Goals Ahead Early Payout</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p>
+             </div>
+             <div>
+               <p> 2 Goals Ahead Early Payout</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p>
+             </div>
+             <div>
+               <p> 2 Goals Ahead Early Payout</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p>
+             </div>
+           </div>
+           </section>
+           <section class="part-5">
+             <h2><i class="fa fa-bolt fa-fw fa-2x"></i> Features</h2>
+             <div class="part-2-parag">
+             <div class="part-2-parag-1">
+
+             <div> <p> Soccer bet builder</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p></div>
+               <img src="C:\Users\hp\Desktop\boomba.bet\up\images/sports-icon/icon1.png" alt="Italian Trulli" >
+
+             </div>
+             <div class="part-2-parag-1">
+               <div> <p> live streaming highlights</p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p></div>
+               <img src="C:\Users\hp\Desktop\boomba.bet\up\images/sports-icon/icon2.png" alt="Italian Trulli" >
+
+             </div>
+             <div class="part-2-parag-1">
+               <div> <p> cash out </p>
+               <p>get bets paid out early , new and eligible customers only </p>
+               <p> more details</p></div>
+               <img src="C:\Users\hp\Desktop\boomba.bet\up\images/sports-icon/icon3.png" alt="Italian Trulli" >
+
+             </div>
+           </div>
+           </section>
+       </div>
+     <!-------------------------------------------- offers + features menu   --------------------------------------------------->
+     </div>
+      <!-------------------------------------------- main part --------------------------------------------------->
+
+
+     </body>
+
+     </html>
