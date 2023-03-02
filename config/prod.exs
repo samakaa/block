@@ -19,7 +19,7 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-config :test_app, TestAppWeb.Endpoint,
+config :blockclock, BlockclockWeb.Endpoint,,
 http: [port: {:system, "PORT"}],
 url: [scheme: "https", host: "floating-beyond-44064.herokuapp.com", port: 443],
 force_ssl: [rewrite_on: [:x_forwarded_proto]],
@@ -29,7 +29,7 @@ secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
 
 # Configure your database
-config :test_app, TestApp.Repo,
+config :test_app, Blockclock.Repo,
 adapter: Ecto.Adapters.Postgres,
 hostname: System.get_env("DATABASE_URL"),
 pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
