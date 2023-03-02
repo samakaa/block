@@ -23,7 +23,7 @@ defmodule BlockClock.Workers.Supervisor do
         children = [
           # Pepare the worker specs
           #{FeedToDb, Keyword.get([opts], :feed_to_db)},
-          {DataWorker, Keyword.get([opts], :data_worker)},
+        #  {DataWorker, Keyword.get([opts], :data_worker)},
 
           #{DataWorkerPregame, Keyword.get([opts], :data_worker_pregame)}
 
