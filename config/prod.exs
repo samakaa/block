@@ -19,7 +19,7 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-config :blockclock, BlockclockWeb.Endpoint,,
+config :blockclock, BlockclockWeb.Endpoint,
 http: [port: {:system, "PORT"}],
 url: [scheme: "https", host: "floating-beyond-44064.herokuapp.com", port: 443],
 force_ssl: [rewrite_on: [:x_forwarded_proto]],
