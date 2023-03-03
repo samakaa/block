@@ -32,6 +32,6 @@ check_origin: ["http://localhost:4000/","https://floating-beyond-44064.herokuapp
 # Configure your database
 config :test_app, Blockclock.Repo,
 adapter: Ecto.Adapters.Postgres,
-hostname: System.get_env("DATABASE_URL"),
+hostname: System.get_env("HEROKU_POSTGRESQL_GRAY_URL"),
 pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
 ssl: true
