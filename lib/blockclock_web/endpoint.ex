@@ -14,10 +14,9 @@ defmodule BlockclockWeb.Endpoint do
     key: "_blockclock_key",
     signing_salt: "eNZgMa6o"
   ]
-  socket "/socket", BlockclockWeb.UserSocket,
-     websocket: [timeout: 45_000]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+
+  socket "/live", Phoenix.LiveView.Socket, websocket: [timeout: 45_000]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
