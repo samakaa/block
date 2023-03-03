@@ -20,7 +20,8 @@ config :blockclock, BlockclockWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
-   check_origin: ["floating-beyond-44064.herokuapp.com"],
+  url: [scheme: "https", host: "floating-beyond-44064.herokuapp.com", port: 443],
+  check_origin: false,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "pF4FUcfFg0po6oF+9GaiinrqVrXxb0kcBWxxksYaM2UNnLZCJxU8gLcuy4PEJluW",
