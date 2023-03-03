@@ -82,7 +82,7 @@ defmodule BlockclockWeb.LeftSporsMenuFilter do
        <li class="a"><div><img src={Routes.static_path(@socket,"/assets/images/sports-icon/vote.png")} alt="Italian Trulli" ><a href="#"> Politics</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
        <li class="a"><div><img src={Routes.static_path(@socket,"/assets/images/sports-icon/professional.png")} alt="Italian Trulli" ><a href="#"> Rugby League</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
        <li class="a"><div><img src={Routes.static_path(@socket,"/assets/images/sports-icon/rugby.png")} alt="Italian Trulli" ><a href="#"> Rugby Union</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
-       <li class="a"><div><img src={Routes.static_path(@socket,"/assets/images/sports-icon/Snooker.png")} alt="Italian Trulli" ><a href="#"> Snookeer</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
+       <li class="a"><div><img src={Routes.static_path(@socket,"/assets/images/sports-icon/snooker.png")} alt="Italian Trulli" ><a href="#"> Snookeer</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
        <li class="a"><div><img src={Routes.static_path(@socket,"/assets/images/sports-icon/football.png")} alt="Italian Trulli" ><a href = {Routes.pregame_path(@socket, :index, "soccer")}> Soccer</a></div><button id="btn"  class="bt"><i class="fa-regular fa-star"></i></button></li>
 
        <li class="left-list-menu-list-2">
