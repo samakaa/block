@@ -24,7 +24,7 @@ http: [port: {:system, "PORT"}],
 url: [scheme: "https", host: "floating-beyond-44064.herokuapp.com", port: 443],
 force_ssl: [rewrite_on: [:x_forwarded_proto]],
 secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
-check_origin: ["http://localhost:4000/","https://floating-beyond-44064.herokuapp.com/"]
+check_origin: ["http://localhost:4000/","https://floating-beyond-44064.herokuapp.com/","https://www.grandibet.com/"]
 
 # Do not print debug messages in production
 
