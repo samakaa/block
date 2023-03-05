@@ -1,7 +1,6 @@
 {
   "buildpacks": [
     "https://buildpack-registry.s3.amazonaws.com/buildpacks/hashnuke/elixir.tgz",
-    "https://github.com/gjaldon/heroku-buildpack-phoenix-static.git",
-    "hashnuke/elixir"
+    "https://github.com/gjaldon/heroku-buildpack-phoenix-static.git"
   ]
 }
