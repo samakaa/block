@@ -52,7 +52,7 @@ defmodule Blockclock.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.7"},
       {:poison, "~> 3.1"},
-      {:timex, "~> 3.6"},
+      
       {:surface, "~> 0.8.0"},
       {:phoenix_live_session, "~> 0.1"}
     ]
