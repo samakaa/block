@@ -13,7 +13,7 @@ config :blockclock, BlockclockWeb.Endpoint,
 cache_static_manifest: "priv/static/cache_manifest.json",
 server: true, # critical for Phoenix to run
 root: ".",
-version: Application.spec(:phoenix_distillery, :vsn)
+version: Application.spec(:blockclock, :vsn)
 # Do not print debug messages in production
 config :logger, level: :info
 
