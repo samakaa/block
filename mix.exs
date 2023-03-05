@@ -5,7 +5,7 @@ defmodule Blockclock.MixProject do
     [
       app: :blockclock,
       version: "0.1.0",
-      elixir: "~> 1.10",
+      elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -37,7 +37,7 @@ defmodule Blockclock.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
-
+      {:distillery, "~> 2.0"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.5"},
@@ -52,7 +52,7 @@ defmodule Blockclock.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.7"},
       {:poison, "~> 3.1"},
-
+      {:timex, "~> 3.6"},
       {:surface, "~> 0.8.0"},
       {:phoenix_live_session, "~> 0.1"}
     ]
