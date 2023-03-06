@@ -5,7 +5,7 @@ defmodule Blockclock.MixProject do
     [
       app: :blockclock,
       version: "0.1.0",
-      elixir: "~> 1.9.4",
+      elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -52,7 +52,7 @@ defmodule Blockclock.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.7"},
       {:poison, "~> 3.1"},
-    #  {:timex, "~> 3.7.9"},
+    #  {:timex, "~> 3.6"},
       {:surface, "~> 0.8.0"},
       {:phoenix_live_session, "~> 0.1"}
     ]
